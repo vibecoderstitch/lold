@@ -1,0 +1,1088 @@
+@import url('https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,400;0,700;0,800;0,900;1,800&family=EB+Garamond:ital,wght@0,400;1,400&family=Outfit:wght@400;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  /* Default: Main Menu (Midnight Void theme) */
+  --bg-color: #050811;
+  --primary-color: #00eefc;
+  --secondary-color: #ff69b4;
+  --text-color: #ffffff;
+  --sub-text-color: #849495;
+  --tilt-angle: -12deg;
+  --border-color: rgba(0, 238, 252, 0.3);
+  --background-image: radial-gradient(circle at 50% 50%, #0c152d 0%, #050811 100%);
+  --font-headline: 'Anybody', sans-serif;
+  --font-body: 'Anybody', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --font-serif: 'EB Garamond', serif;
+  
+  --shadow-offset: 4px;
+}
+
+body.theme-0, .theme-0 {
+  --bg-color: #050811;
+  --primary-color: #00eefc;
+  --secondary-color: #ff69b4;
+  --text-color: #ffffff;
+  --sub-text-color: #849495;
+  --tilt-angle: -12deg;
+  --border-color: rgba(0, 238, 252, 0.4);
+  --background-image: radial-gradient(circle at 50% 50%, #0d162a 0%, #050811 100%);
+}
+
+body.theme-1, .theme-1 {
+  /* Chapter 1: Down the Rabbit-Hole (Sweet Dreams theme) */
+  --bg-color: #fcf8ff;
+  --primary-color: #3eb489;
+  --secondary-color: #ff69b4;
+  --text-color: #1a1a2e;
+  --sub-text-color: #6d7a72;
+  --tilt-angle: -12deg;
+  --border-color: #1a1a2e;
+  --background-image: linear-gradient(135deg, #e3f8ff 0%, #fcf8ff 100%);
+}
+
+body.theme-2, .theme-2 {
+  /* Chapter 2: It's my Own Invention (Glitch Vapor-Punk) */
+  --bg-color: #000000;
+  --primary-color: #7fff00;
+  --secondary-color: #ff1493;
+  --text-color: #ffffff;
+  --sub-text-color: #6d00ff;
+  --tilt-angle: -15deg;
+  --border-color: #ff1493;
+  --background-image: radial-gradient(circle at 50% 50%, #1e0033 0%, #000000 100%);
+}
+
+body.theme-3, .theme-3 {
+  /* Chapter 3: Idealism - Scholarly Minimalism Pivot */
+  --bg-color: #FAF6E9;
+  --primary-color: #c99a49;
+  --secondary-color: #8c1d25;
+  --text-color: #1c1b18;
+  --sub-text-color: #5c5850;
+  --tilt-angle: -5deg;
+  --border-color: #1c1b18;
+  --background-image: linear-gradient(135deg, #FAF6E9 0%, #f3ebd4 100%);
+}
+
+body.theme-4, .theme-4 {
+  /* Chapter 4: Jabberwocky I (Velvet Rooftop Collapse - Theatrical Brutalism) */
+  --bg-color: #130e01;
+  --primary-color: #d4a373;
+  --secondary-color: #ff3b30;
+  --text-color: #faedcd;
+  --sub-text-color: #8e928e;
+  --tilt-angle: -12deg;
+  --border-color: #d4a373;
+  --background-image: linear-gradient(135deg, #130e01 0%, #1f2421 100%);
+}
+
+body.theme-5, .theme-5 {
+  /* Chapter 5: Which Dreamed It (Mirror Solipsism - Avant-Garde Minimal) */
+  --bg-color: #000e24;
+  --primary-color: #a8dadc;
+  --secondary-color: #e63946;
+  --text-color: #d5e3ff;
+  --sub-text-color: #f1faee;
+  --tilt-angle: -10deg;
+  --border-color: #a8dadc;
+  --background-image: radial-gradient(circle at 50% 50%, #032041 0%, #000e24 100%);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  transition: background-color 0.8s cubic-bezier(0.25, 0.8, 0.25, 1),
+              color 0.8s cubic-bezier(0.25, 0.8, 0.25, 1),
+              border-color 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-color: var(--bg-color);
+  background-image: var(--background-image);
+  background-attachment: fixed;
+  color: var(--text-color);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Global Scanlines & CRT Noise */
+.global-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  background-size: 100% 4px, 6px 100%;
+}
+
+body.theme-2 .global-overlay {
+  opacity: 0.07;
+  animation: crt-flicker 0.15s infinite;
+}
+
+@keyframes crt-flicker {
+  0% { opacity: 0.06; }
+  50% { opacity: 0.09; }
+  100% { opacity: 0.07; }
+}
+
+/* Typography styles */
+h1, h2, h3 {
+  font-family: var(--font-headline);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+/* Interactive Tilted Menu Items */
+.tilted-item {
+  font-family: var(--font-headline);
+  font-weight: 900;
+  font-size: clamp(2rem, 4.5vw, 6rem);
+  text-transform: uppercase;
+  color: var(--text-color);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  display: block;
+  width: fit-content;
+  text-align: left;
+  transform: skewX(var(--tilt-angle));
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  margin: 1rem 0;
+  padding: 0.2rem 1.5rem;
+}
+
+.tilted-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: var(--secondary-color);
+  z-index: -1;
+  transform: skewX(0);
+  transition: width 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.tilted-item:hover {
+  color: var(--bg-color);
+  padding-left: 2.5rem;
+  transform: skewX(var(--tilt-angle)) scale(1.05) translate(10px, -5px);
+  text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.tilted-item:hover::before {
+  width: 100%;
+}
+
+.tilted-item.active {
+  color: var(--bg-color);
+  background-color: var(--primary-color);
+  padding-left: 2.5rem;
+  box-shadow: 8px 8px 0px var(--border-color);
+}
+
+/* Glass Panels and Shards */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  transform: skewX(var(--tilt-angle));
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.glass-panel > * {
+  transform: skewX(calc(-1 * var(--tilt-angle)));
+}
+
+body.theme-1 .glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px solid var(--border-color);
+  box-shadow: 6px 6px 0px var(--border-color);
+}
+
+body.theme-2 .glass-panel {
+  background: rgba(18, 18, 18, 0.95);
+  border: 3px solid var(--primary-color);
+  box-shadow: 8px 8px 0px var(--secondary-color);
+}
+
+body.theme-3 .glass-panel {
+  background: #fdfbf7;
+  border: 1.5px solid var(--border-color);
+  box-shadow: 4px 4px 0px var(--border-color);
+  color: var(--text-color);
+}
+
+body.theme-4 .glass-panel {
+  background: rgba(31, 36, 33, 0.85);
+  border: 2px solid var(--primary-color);
+  box-shadow: 6px 6px 0px var(--secondary-color);
+}
+
+body.theme-5 .glass-panel {
+  background: rgba(241, 250, 238, 0.92);
+  border: 2px solid var(--primary-color);
+  box-shadow: 6px 6px 0px var(--primary-color);
+  color: #1d3557;
+}
+
+/* Custom Buttons */
+.custom-btn {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  padding: 0.8rem 1.8rem;
+  border: 2px solid var(--text-color);
+  background: transparent;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  transform: skewX(var(--tilt-angle));
+  position: relative;
+  overflow: hidden;
+  outline: none;
+}
+
+.custom-btn > span {
+  display: inline-block;
+  transform: skewX(calc(-1 * var(--tilt-angle)));
+}
+
+.custom-btn:hover {
+  background: var(--primary-color);
+  color: var(--bg-color);
+  border-color: var(--primary-color);
+  box-shadow: 4px 4px 0px var(--secondary-color);
+  transform: skewX(var(--tilt-angle)) translate(-2px, -2px);
+}
+
+.custom-btn:active {
+  transform: skewX(var(--tilt-angle)) translate(0px, 0px);
+  box-shadow: none;
+}
+
+/* Bento Cells */
+.bento-cell {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+body.theme-1 .bento-cell {
+  background: #ffffff;
+  border: 2px solid var(--border-color);
+  box-shadow: 4px 4px 0px var(--border-color);
+}
+
+body.theme-1 .bento-cell:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0px var(--secondary-color);
+}
+
+/* Retro Windows Styles for Chapter 2 */
+.retro-window {
+  background: #c0c0c0;
+  border: 3px solid;
+  border-color: #fff #555 #555 #fff;
+  padding: 3px;
+  font-family: var(--font-mono);
+  color: #000;
+  box-shadow: 6px 6px 0px rgba(255, 20, 147, 0.4);
+}
+
+.retro-window-header {
+  background: linear-gradient(90deg, var(--secondary-color), var(--sub-text-color));
+  color: #fff;
+  padding: 4px 8px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: move;
+}
+
+.retro-window-body {
+  background: #fff;
+  border: 2px solid;
+  border-color: #555 #fff #fff #555;
+  padding: 1.5rem;
+  margin-top: 4px;
+  min-height: 100px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.retro-window-btn {
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #fff #555 #555 #fff;
+  padding: 2px 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.retro-window-btn:active {
+  border-color: #555 #fff #fff #555;
+}
+
+/* Oil painting text block for Chapter 3 */
+.painterly-block {
+  position: relative;
+  padding: 2rem;
+  border-left: 5px solid var(--secondary-color);
+  background: rgba(13, 21, 21, 0.6);
+  backdrop-filter: blur(8px);
+}
+
+.painterly-block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(var(--secondary-color) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.05;
+  z-index: -1;
+}
+
+/* Background Wittgenstein noise text */
+.floating-quote-bg {
+  position: absolute;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 8vw;
+  line-height: 1;
+  color: var(--text-color);
+  opacity: 0.03;
+  pointer-events: none;
+  white-space: nowrap;
+  transform: skewY(-5deg);
+  z-index: -2;
+  user-select: none;
+}
+
+body.theme-1 .floating-quote-bg {
+  opacity: 0.05;
+  color: var(--primary-color);
+}
+
+body.theme-2 .floating-quote-bg {
+  opacity: 0.08;
+  font-family: var(--font-mono);
+  color: var(--primary-color);
+  font-size: 6vw;
+  transform: skewY(-15deg);
+}
+
+body.theme-3 .floating-quote-bg {
+  opacity: 0.04;
+  color: var(--secondary-color);
+  transform: skewY(10deg);
+}
+
+body.theme-4 .floating-quote-bg {
+  opacity: 0.05;
+  color: var(--primary-color);
+  transform: skewY(-5deg);
+}
+
+body.theme-5 .floating-quote-bg {
+  opacity: 0.06;
+  color: var(--secondary-color);
+  transform: skewY(6deg);
+}
+
+/* Glitch Animation */
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-color);
+}
+
+body.theme-2 .glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--secondary-color);
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+body.theme-2 .glitch-text::after {
+  left: -2px;
+  text-shadow: -2px 0 var(--primary-color), 0 2px var(--secondary-color);
+  clip: rect(85px, 450px, 140px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(15px, 9999px, 66px, 0); }
+  10% { clip: rect(34px, 9999px, 55px, 0); }
+  20% { clip: rect(1px, 9999px, 115px, 0); }
+  30% { clip: rect(89px, 9999px, 120px, 0); }
+  40% { clip: rect(23px, 9999px, 98px, 0); }
+  50% { clip: rect(67px, 9999px, 45px, 0); }
+  60% { clip: rect(122px, 9999px, 140px, 0); }
+  70% { clip: rect(5px, 9999px, 32px, 0); }
+  80% { clip: rect(144px, 9999px, 160px, 0); }
+  90% { clip: rect(78px, 9999px, 99px, 0); }
+  100% { clip: rect(12px, 9999px, 85px, 0); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip: rect(76px, 9999px, 116px, 0); }
+  11% { clip: rect(12px, 9999px, 45px, 0); }
+  22% { clip: rect(89px, 9999px, 99px, 0); }
+  33% { clip: rect(4px, 9999px, 67px, 0); }
+  44% { clip: rect(132px, 9999px, 150px, 0); }
+  55% { clip: rect(55px, 9999px, 78px, 0); }
+  66% { clip: rect(98px, 9999px, 122px, 0); }
+  77% { clip: rect(23px, 9999px, 56px, 0); }
+  88% { clip: rect(110px, 9999px, 130px, 0); }
+  100% { clip: rect(5px, 9999px, 80px, 0); }
+}
+
+/* Chapter 4 & 5 Custom Visual Upgrades - Stitch MCP Merger */
+
+/* Slanted Staircase List Items */
+.staircase-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.staircase-item {
+  text-align: left;
+  background: transparent;
+  border: 2px solid var(--border-color);
+  color: var(--text-color);
+  padding: 1rem 1.5rem;
+  transform: skewX(var(--tilt-angle));
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+  font-family: var(--font-mono);
+  position: relative;
+  box-shadow: 6px 6px 0px var(--bg-color);
+}
+
+.staircase-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--secondary-color);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.staircase-item:nth-child(even) {
+  margin-left: 24px;
+}
+
+.staircase-item:hover {
+  background: var(--primary-color);
+  color: var(--bg-color) !important;
+  border-color: var(--primary-color);
+  box-shadow: 6px 6px 0px var(--secondary-color);
+  transform: skewX(var(--tilt-angle)) translate(-4px, -4px);
+}
+
+.staircase-item:hover::after {
+  opacity: 1;
+}
+
+.staircase-item.active {
+  background: var(--secondary-color);
+  color: var(--bg-color) !important;
+  border-color: var(--secondary-color);
+  box-shadow: 6px 6px 0px var(--primary-color);
+  transform: skewX(var(--tilt-angle)) translate(-2px, -2px);
+}
+
+/* Snipped Hexagonal / Parallelogram Buttons */
+.snip-btn {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  padding: 0.6rem 1.6rem;
+  background: transparent;
+  color: var(--text-color);
+  border: 2px solid var(--primary-color);
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  transition: all 0.3s ease;
+}
+
+.snip-btn:hover {
+  background: var(--primary-color);
+  color: var(--bg-color) !important;
+  box-shadow: 0px 0px 12px var(--primary-color);
+  transform: scale(1.03);
+}
+
+/* Diagonal Split Panel for Solipsism */
+.diagonal-split-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  min-height: 480px;
+  position: relative;
+  border: 4px solid var(--border-color);
+  overflow: hidden;
+  box-shadow: 8px 8px 0px var(--secondary-color);
+}
+
+/* Falling Feathers & Particles Layer */
+.feather-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.feather-particle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.4);
+  clip-path: ellipse(4px 12px at 50% 50%);
+  animation: fall-sway 12s linear infinite;
+  pointer-events: none;
+}
+
+.feather-particle.dark {
+  background: rgba(0, 0, 0, 0.6);
+  clip-path: ellipse(5px 15px at 50% 50%);
+}
+
+@keyframes fall-sway {
+  0% {
+    transform: translateY(-20px) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(105vh) translateX(120px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* JRPG 5-Stripe Shutter Transition System */
+
+.shutter-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 20000;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+/* Active transition stages: visible and pointer events enabled */
+.shutter-overlay.stage-entering,
+.shutter-overlay.stage-separating,
+.shutter-overlay.stage-exiting {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+}
+
+.shutter-strip {
+  position: absolute;
+  top: -10%;
+  height: 120%;
+  transform: translateY(-180%) skewX(-24deg); /* Start off-screen top */
+  transition: transform 0.48s cubic-bezier(0.25, 1, 0.5, 1), 
+              opacity 0.35s ease;
+  box-shadow: 15px 0px 40px rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 4px solid var(--border-color);
+}
+
+.shutter-strip-label {
+  font-family: var(--font-mono);
+  font-weight: 900;
+  font-size: 1.4rem;
+  color: #fff;
+  transform: skewX(24deg) rotate(-90deg);
+  white-space: nowrap;
+  letter-spacing: 0.1em;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 0.4rem 1.2rem;
+  border: 2px solid var(--primary-color);
+}
+
+/* Idle State: instantly snap back off-screen top, no transitions */
+.shutter-overlay.stage-idle .shutter-strip {
+  transform: translateY(-180%) skewX(-24deg) !important;
+  transition: none !important;
+  opacity: 1 !important;
+}
+
+.shutter-overlay.stage-idle .shutter-strip-label {
+  opacity: 0 !important;
+  transition: none !important;
+}
+
+/* Entering State: all stripes transition down to translateY(0) */
+.shutter-overlay.stage-entering .shutter-strip {
+  transform: translateY(0) skewX(-24deg);
+}
+
+.shutter-overlay.stage-entering .shutter-strip-label {
+  opacity: 0.9;
+  transition-delay: 0.35s;
+}
+
+/* Separating State: non-selected stripes fall down, chosen stripe expands */
+.shutter-overlay.stage-separating .shutter-strip.non-selected {
+  transform: translateY(180%) skewX(-24deg);
+  opacity: 0;
+}
+
+.shutter-overlay.stage-separating .shutter-strip.selected {
+  left: -20vw !important;
+  width: 140vw !important;
+  transform: translateY(0) skewX(0deg);
+  z-index: 20100;
+  box-shadow: none;
+  border-right: none;
+}
+
+.shutter-overlay.stage-separating .shutter-strip.selected .shutter-strip-label {
+  opacity: 0;
+  transform: scale(1.5);
+  transition: all 0.3s ease;
+}
+
+/* Exiting State: chosen expands or fades away completely */
+.shutter-overlay.stage-exiting {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease-out, visibility 0.35s ease-out;
+}
+
+.shutter-overlay.stage-exiting .shutter-strip.selected {
+  opacity: 0;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+/* JRPG Slanted Title Reveal Styling */
+.jrpg-chapter-reveal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 90vw;
+  transform: skewX(-12deg);
+  opacity: 0;
+  animation: reveal-pop-in 0.5s cubic-bezier(0.19, 1, 0.22, 1) 0.1s forwards;
+  z-index: 1000;
+}
+
+@keyframes reveal-pop-in {
+  0% {
+    transform: skewX(-12deg) scale(0.85) translateY(40px);
+    opacity: 0;
+  }
+  100% {
+    transform: skewX(-12deg) scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.reveal-sub {
+  font-family: var(--font-mono);
+  font-size: clamp(0.9rem, 1.8vw, 1.4rem);
+  font-weight: 800;
+  letter-spacing: 0.4em;
+  color: var(--text-color);
+  background: var(--bg-color);
+  border: 2px solid var(--border-color);
+  padding: 0.4rem 1.8rem;
+  box-shadow: 4px 4px 0px var(--secondary-color);
+  transform: skewX(12deg);
+  text-transform: uppercase;
+}
+
+.reveal-main-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 100%;
+  align-items: center;
+}
+
+.reveal-line {
+  font-family: var(--font-headline);
+  font-weight: 900;
+  font-size: clamp(2rem, 5.5vw, 6.5rem);
+  text-transform: uppercase;
+  padding: 0.6rem 2.5rem;
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+  display: inline-block;
+  line-height: 1;
+}
+
+.reveal-line.primary-block {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  box-shadow: 8px 8px 0px var(--secondary-color);
+}
+
+.reveal-line.secondary-block {
+  background-color: var(--secondary-color);
+  color: #fff;
+  box-shadow: -8px 8px 0px var(--primary-color);
+}
+
+.reveal-line.dark-block {
+  background-color: #000;
+  color: #fff;
+  border: 3px solid var(--primary-color);
+  box-shadow: 8px 8px 0px var(--secondary-color);
+}
+
+/* ==========================================================================
+   Edge Drag Pull-Handle & Swipe-Shutter Styles
+   ========================================================================== */
+
+/* Active Pull handle zones */
+.edge-pull-handle {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 120px;
+  width: 45px;
+  z-index: 10000;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  overflow: visible;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Tab indicator bar */
+.edge-pull-handle-tab {
+  height: 100%;
+  width: 12px;
+  background-color: var(--primary-color);
+  border: 2px solid var(--border-color);
+  box-shadow: 0 0 15px var(--primary-color);
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  opacity: 0.85;
+}
+
+.edge-pull-handle:hover .edge-pull-handle-tab {
+  width: 22px;
+  opacity: 1;
+  box-shadow: 0 0 25px var(--primary-color), 0 0 10px var(--secondary-color);
+}
+
+.edge-pull-handle.left {
+  left: 0;
+}
+
+.edge-pull-handle.right {
+  right: 0;
+}
+
+/* Slanted floating pull-label that pops in on hover */
+.edge-pull-label {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #fff;
+  background: var(--bg-color);
+  border: 2px solid var(--primary-color);
+  padding: 4px 10px;
+  white-space: nowrap;
+  letter-spacing: 0.1em;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 100;
+  box-shadow: 4px 4px 0 var(--secondary-color);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.edge-pull-handle.left .edge-pull-label {
+  left: 20px;
+  transform: translateY(-50%) translateX(-10px);
+}
+
+.edge-pull-handle.right .edge-pull-label {
+  right: 20px;
+  transform: translateY(-50%) translateX(10px);
+}
+
+.edge-pull-handle:hover .edge-pull-label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Pulsing prompt arrows */
+.edge-pull-arrow {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #000;
+  text-shadow: 0 0 8px #fff;
+  animation: pulse-arrow 1.5s infinite ease-in-out;
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@keyframes pulse-arrow {
+  0%, 100% { transform: translateY(-50%) scale(1) translateX(0); opacity: 0.6; }
+  50% { transform: translateY(-50%) scale(1.2) translateX(3px); opacity: 1; }
+}
+
+.edge-pull-handle.left .edge-pull-arrow {
+  animation-name: pulse-arrow-left;
+  left: -2px;
+}
+
+@keyframes pulse-arrow-left {
+  0%, 100% { transform: translateY(-50%) scale(1) translateX(0) rotate(180deg); opacity: 0.6; }
+  50% { transform: translateY(-50%) scale(1.2) translateX(-3px) rotate(180deg); opacity: 1; }
+}
+
+/* Dynamic Swipe Curtain Overlay */
+.swipe-shutter-overlay {
+  position: fixed;
+  top: -10%;
+  height: 120%;
+  width: 140vw;
+  z-index: 19900;
+  pointer-events: none;
+  border-right: 4px solid var(--border-color);
+  border-left: 4px solid var(--border-color);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.38s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: transform;
+}
+
+.swipe-shutter-overlay.left {
+  left: -20vw;
+  transform: skewX(var(--curtain-skew, -24deg)) translate3d(-100%, 0, 0);
+  transform-origin: left top;
+}
+
+.swipe-shutter-overlay.right {
+  right: -20vw;
+  transform: skewX(var(--curtain-skew, -24deg)) translate3d(100%, 0, 0);
+  transform-origin: right top;
+}
+
+.swipe-shutter-overlay.left.active {
+  transform: skewX(var(--curtain-skew, -24deg)) translate3d(0, 0, 0);
+}
+
+.swipe-shutter-overlay.right.active {
+  transform: skewX(var(--curtain-skew, -24deg)) translate3d(0, 0, 0);
+}
+
+/* Shutter text content (un-skewed) */
+.swipe-shutter-content {
+  transform: skewX(24deg);
+  font-family: var(--font-headline);
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  background: rgba(0,0,0,0.85);
+  border: 2px solid var(--primary-color);
+  padding: 0.8rem 2.2rem;
+  box-shadow: 8px 8px 0 var(--secondary-color);
+}
+
+/* ==========================================================================
+   Chapter 3 Scholarly Minimalism Custom Overrides
+   ========================================================================== */
+body.theme-3 .staircase-item {
+  background: #fdfbf7;
+  border: 1.5px solid var(--border-color);
+  box-shadow: 3px 3px 0px var(--border-color);
+  transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+body.theme-3 .staircase-item:hover {
+  background: var(--primary-color) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 5px 5px 0px var(--border-color) !important;
+  transform: skewX(var(--tilt-angle)) translate(-3px, -3px) !important;
+}
+
+body.theme-3 .staircase-item.active {
+  background: var(--secondary-color) !important;
+  color: #ffffff !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 4px 4px 0px var(--border-color) !important;
+  transform: skewX(var(--tilt-angle)) translate(-1px, -1px) !important;
+}
+
+body.theme-3 .staircase-item:nth-child(even) {
+  margin-left: 12px !important;
+}
+
+body.theme-3 .staircase-list {
+  gap: 1.5rem;
+}
+
+body.theme-3 .custom-btn {
+  border: 1.5px solid var(--border-color);
+  background: #fdfbf7;
+  color: var(--text-color);
+  box-shadow: 2px 2px 0px var(--border-color);
+  transition: all 0.2s ease;
+}
+
+body.theme-3 .custom-btn:hover {
+  background: var(--primary-color) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 4px 4px 0px var(--border-color) !important;
+  transform: skewX(var(--tilt-angle)) translate(-2px, -2px) !important;
+}
+
+body.theme-3 .custom-btn.active {
+  background: var(--secondary-color) !important;
+  color: #ffffff !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 2px 2px 0px var(--border-color) !important;
+  transform: skewX(var(--tilt-angle)) !important;
+}
+
+body.theme-3 .floating-quote-bg {
+  opacity: 0.05;
+  color: var(--primary-color);
+  transform: skewY(-5deg) !important;
+  font-family: var(--font-serif);
+}
+
+body.theme-3 .painterly-block {
+  background: #fdfbf7;
+  border: 1.5px solid var(--border-color);
+  border-left: 6px solid var(--secondary-color) !important;
+  box-shadow: 4px 4px 0px var(--border-color);
+  color: var(--text-color);
+}
+
+body.theme-3 .plato-3d-showcase-container {
+  animation: none !important;
+}
+
+/* Custom transitions and stripes borders for Chapter 3 specifically */
+body.theme-3 .shutter-strip {
+  border-right: 4px solid var(--border-color);
+}
+
+/* Pull handles style for Chapter 3 transition */
+.edge-pull-handle.theme-3 .edge-pull-handle-tab {
+  background-color: var(--primary-color) !important;
+  border: 2px solid var(--border-color) !important;
+  box-shadow: 4px 4px 0px var(--border-color) !important;
+  opacity: 0.9;
+}
+.edge-pull-handle.theme-3:hover .edge-pull-handle-tab {
+  width: 20px !important;
+  box-shadow: 6px 6px 0px var(--secondary-color) !important;
+}
+.edge-pull-handle.theme-3 .edge-pull-arrow {
+  color: var(--border-color) !important;
+  text-shadow: none !important;
+}
+.edge-pull-handle.theme-3 .edge-pull-label {
+  background: #fdfbf7 !important;
+  border: 1.5px solid var(--border-color) !important;
+  box-shadow: 3px 3px 0px var(--border-color) !important;
+  color: var(--text-color) !important;
+}
+.edge-pull-handle.theme-3:hover .edge-pull-label {
+  transform: translateY(-50%) translateX(0) !important;
+}
+
+/* Swipe shutter overlay for Chapter 3 transition */
+.swipe-shutter-overlay.theme-3 {
+  --curtain-skew: -6deg;
+  border-right: 3px solid var(--border-color) !important;
+  border-left: 3px solid var(--border-color) !important;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.4) !important;
+}
+.swipe-shutter-overlay.theme-3 .swipe-shutter-content {
+  transform: skewX(6deg) !important;
+  background: #fdfbf7 !important;
+  color: var(--text-color) !important;
+  border: 2.5px solid var(--border-color) !important;
+  box-shadow: 6px 6px 0px var(--border-color) !important;
+  font-family: var(--font-mono) !important;
+}
+
+
